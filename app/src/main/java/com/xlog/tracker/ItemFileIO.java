@@ -56,7 +56,20 @@ public class ItemFileIO {
         return items;
     }
 
-    public void writeItem(Item item, int amount) {
+    public void newItem(Item item) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(itemsFile, true));
+            bw.append(item.getDataString());
+            bw.newLine();
+            bw.flush();
+            bw.close();
+        } catch (IOException e) {
+            Log.d("Update items file", "IOException while creating new BufferedWriter()");
+        }
+
+    }
+
+        public void writeItem(Item item, int amount) {
         try {
             File itemFile = new File(itemsFolder.getAbsolutePath() + "/" + item.getName() + ".dat");
             BufferedWriter bw = new BufferedWriter(new FileWriter(itemFile, true));
@@ -69,7 +82,6 @@ public class ItemFileIO {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         updateItemsFile(item);
     }
 
@@ -78,7 +90,6 @@ public class ItemFileIO {
      * @param item
      */
     private void updateItemsFile(Item item) {
-        String desiredLine = item.getDataString(); // the line in file meant to be found and updated.
         BufferedReader reader = getBufferedReader(itemsFile);
         StringBuilder strBuilder = new StringBuilder();
         String line;
@@ -122,4 +133,18 @@ public class ItemFileIO {
         }
         return reader;
     }
+
+    public ArrayList<ItemRecord> getItemRecords(String item) throws IOException {
+        File itemFile = new File(itemsFolder + "/" + item + ".dat");
+        ArrayList<ItemRecord> itemRecords = new ArrayList<>();
+        BufferedReader reader = getBufferedReader(itemFile);
+        String line;
+        Log.d("Load tag", "Before loop");
+        while ((line = reader.readLine()) != null) {
+            ItemRecord ir = new ItemRecord(line);
+            itemRecords.add(ir);
+        }
+        return itemRecords;
+    }
+
 }

@@ -3,9 +3,10 @@ package com.xlog.tracker;
 import android.util.Log;
 import android.view.View;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Item {
+public class Item implements Serializable {
     private String name;
     private String info;
     private int count;
@@ -26,8 +27,8 @@ public class Item {
     }
 
     public void print() {
-        String info = this.name + ", " + this.info + " ," + Integer.toString(count);
-        Log.d("Button Tag", info + "-----------------------");
+        String info = this.name + ", " + this.info + ", " + Integer.toString(count);
+        Log.d("Item Info", info + "-----------------------");
     }
 
     public void increase() {

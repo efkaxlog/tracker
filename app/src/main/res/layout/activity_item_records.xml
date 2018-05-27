@@ -4,25 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".ItemRecordsActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarRecords"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:title="Tracker"
-        app:titleTextColor="@android:color/white">
-    </android.support.v7.widget.Toolbar>
+        android:theme="?attr/actionBarTheme"
+        app:titleTextColor="@android:color/white"/>
 
     <ListView
-        android:id="@+id/item_list"
+        android:id="@+id/lvRecords"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </ListView>
-
+        android:layout_height="match_parent" />
 </LinearLayout>
